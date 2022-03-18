@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+</head>
+<body>
+  <%- include layout %>
+  <div class="container">
+      <h2 align="center">เขียนบทความ</h2>
+      <form class="" action="/blog/add" method="post">
+        <div class="mb-3">
+          <label for="ชื่อบทความ" class="form-label">ชื่อบทความ</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อบทความ">
+        </div>
+        <div class="mb-3">
+          <label for="ชื่อบทความ" class="form-label">รายละเอียด</label>
+          <textarea class="form-control" id="description" name="description" rows="5" cols="50"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="ผู้แต่ง" class="form-label">ผู้แต่ง</label>
+          <input type="text" class="form-control" id="author" name="author">
+        </div>
+        <input type="submit" name="" value="บันทึก" class="btn btn-success">
+      </form>
+  </div>
+  <script>
+    CKEDITOR.replace( 'description' );
+ </script>
+</body>
+</html>
