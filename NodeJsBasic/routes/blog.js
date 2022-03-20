@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const { body, validationResult } = require('express-validator');
+const { 
+    body,
+    validationResult
+} = require('express-validator');
+const monk = require('monk') // monk for insert to db
+// Connection URL
+const url = 'localhost:27017/nodejs2019';
+// const db = require('monk')("localhost:27017/nodejs2019");
+const db = monk(url);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,7 +36,21 @@ router.post('/add', [
         //     errors: errors.array()
         // });
     }else{
-        //insert to db
+        //insert to db collection
+        var collection = db.get('blogs');
+        collection.insert({
+            name:req.body.name, // field or keyname = value
+            description:req.body.description,
+            author:req.body.author
+        },function(err,blog){
+            if(err){
+                res.send(err);
+            }else{
+                req.flash("success", "บันทึกข้อมูลเรียบร้อยแล้ว");
+                res.location('/');
+                res.redirect('/blog/add');
+            }
+        });
     }
     // console.log(req.body.name);
     // console.log(req.body.description);
